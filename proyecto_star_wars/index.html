@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de la Alianza Rebelde</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Base de la Alianza Rebelde</h1>
+        <nav> <!-- Barra de navegación con las distintas secciones -->
+
+            <button onclick="mostrarSeccion('hangar')">Hangar</button>
+            <button onclick="mostrarSeccion('pilotos')">Pilotos</button>
+            <button onclick="mostrarSeccion('misiones')">Misiones</button>
+            <button onclick="mostrarSeccion('mando')">Mando</button>
+        </nav>
+    </header>
+
+    <!-- Secciones -->
+    <main id="main">
+        
+        <section id="hangar" class="seccion">
+            <h2>Hangar de Naves</h2>
+        </section>
+
+        <section id="pilotos" class="seccion" style="display:none">
+            <h2>Registro de Pilotos</h2>
+        </section>
+
+        <section id="misiones" class="seccion" style="display:none">
+            <h2>Panel de Misiones</h2>
+        </section>
+
+        <section id="mando" class="seccion" style="display:none">
+            <h2>Mando de la Alianza</h2>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; Alianza Rebelde </p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
