@@ -311,7 +311,6 @@ table th {
 }
 
 /* --- RESPONSIVE DASHBOARD --- */
-
 /* Cuando la pantalla sea menor a 800px */
 @media (max-width: 800px) {
     .columnasDashboard {
