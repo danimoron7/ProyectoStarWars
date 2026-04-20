@@ -1,13 +1,13 @@
 /* Estilos básicos */
 body {
-    background-color: #1a1a1a;
+    background-color: #0d0d0d;
     color: #ffffff;            
     font-family: Arial, sans-serif;
     margin: 0;
     line-height: 1.5;
 }
 
-/* Navegación fija */
+/* Estilos para el header */
 header {
     background-color: #000000;
     padding: 15px;
@@ -15,7 +15,19 @@ header {
     border-bottom: 5px solid #FF8C00;
 }
 
-/* Botones del menú */
+/* Color para los títulos*/
+h1, h2 {
+    color: #FF8C00;
+}
+
+/* Estilos para el footer*/
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #888888;
+}
+
+/* Navegación  */
 nav button {
     background-color: #000000;
     color: #ffffff;
@@ -24,9 +36,9 @@ nav button {
     padding: 10px 20px;
     margin: 3px;
     cursor: pointer;
-    
 }
 
+/* Al pasar por encima de los botones del menú de navegación*/
 nav button:hover {
     background-color: #FF8C00;
     color: #000000;
@@ -36,16 +48,279 @@ nav button:hover {
 .seccion {
     padding: 30px;
     margin: 20px;
-    background-color: #262626; 
+    background-color: #161616; 
     text-align: center;
 }
 
-h1, h2 {
+/* --- FORMULARIOS UNIFICADOS (Hangar, Pilotos y Misiones) --- */
+.busqueda, .formularioPiloto, .formularioMision, .filtrosMisiones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #111; 
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.busqueda input, .busqueda select, .busqueda button,
+.formularioPiloto input, .formularioPiloto select,
+.formularioMision input, .formularioMision select,
+.filtrosMisiones select {
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #444;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Efecto de resplandor naranja al hacer foco */
+.busqueda input:focus, .busqueda select:focus,
+.formularioPiloto input:focus, .formularioPiloto select:focus,
+.formularioMision input:focus, .formularioMision select:focus {
+    border-color: #FF8C00;
+    box-shadow: 0 0 15px #FF8C00;
+}
+
+/* Botones de acción principal */
+.formularioPiloto button, .formularioMision button, .busqueda button {
+    background-color: #FF8C00;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+}
+
+.formularioPiloto button:hover, .formularioMision button:hover {
+    background-color: #e67e00;
+}
+
+/* */
+/* Clase para botones de acción uniformes */
+.botones {
+    background-color: #FF8C00; /* Naranja */
+    color: #000000;            /* Letras negras */
+    border: none;
+    padding: 8px 12px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 2px;
+    transition: background-color 0.2s;
+}
+
+.botones:hover {
+    background-color: #e67e00; /* Un naranja más oscuro al pasar el ratón */
+}
+
+/* Sección Hangar */
+.hangarnaves {
+    display: flex; /* Pone la parrilla de naves a un lado y los detalles al otro */
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Estilo grid para formar las cuadrículas de las naves y sus detalles */
+.parrilla {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Hace 3 columnas de naves */
+    gap: 20px;
+    width: 60%;
+}
+
+.columnaDetalles {
+    width: 40%;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid #FF8C00;
+    padding: 20px;
+    color: white;
+}
+
+.fotosNaves {
+    text-align: center;
+    border: 2px solid #333;
+    padding: 10px;
+}
+
+.fotosNaves:hover {
+    border-color: #FF8C00;
+}
+
+.fotosNaves img {
+    width: 100%; /* Para que la imagen se adapte al cuadrito */
+    height: 120px;
+    object-fit: contain /* Para que la imagen tenga el mismo tamaño en las cuadrículas */;
+}
+
+/* Seccion pilotos */
+/* Estilo para la tabla de pilotos */
+table {
+    border-collapse: collapse; /* *Para que se unan las columnas */ 
+    background-color: rgba(0, 0, 0, 0.6);
+    margin-top: 20px;
+}
+
+table th, table td {
+    border: 3px solid #444;
+    padding: 12px;
+}
+
+table th {
+    background-color: #333;
     color: #FF8C00;
 }
 
-footer {
-    text-align: center;
+/* Colores para el estado de los pilotos */
+.estado-activo {
+    color: #00ff00;
+    font-weight: bold;
+}
+
+.estado-herido {
+    color: #ff8c00;
+    font-weight: bold;
+}
+
+.estado-kia {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+/* Seccion misiones */
+/* Contenedor principal */
+.kanbanMisiones {
+    display: flex;
+    flex-direction: row; /* Alineación horizontal */
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+    align-items: flex-start; /* Para que si una es más larga no estire a las demás */
+}
+
+/* Estilo para las columnas */
+.columnaMisiones {
+    background-color: rgba(38, 38, 38, 0.9);
+    border: 5px solid #444;
+    border-radius: 10px;
+    flex: 1; /* Hace que las columnas midan lo mismo*/
+    padding: 15px;
+    min-height: 300px; /* Altura mínima para que no se vea vacía */
+    box-sizing: border-box; 
+}
+
+/* Tarjetas de misión */
+.tarjetaMision {
+    background: #1a1a1a;
+    border: 10px solid #555;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    text-align: left;
+}
+
+/* Estilo para los botones de debajo del texto */
+.botonesMisiones {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Colores específicos por dificultad */
+.tarjetaMision.facil {
+    border-left: 10px solid #00ff00;
+    border-right: 10px solid #00ff00; 
+}
+
+.tarjetaMision.media {
+    border-left: 10px solid #ff8c00;
+    border-right: 10px solid #ff8c00;
+}
+
+.tarjetaMision.dificil {
+    border-left: 10px solid #ff0000;
+    border-right: 10px solid #ff0000; 
+
+}
+
+.tarjetaMision.suicida {
+    border-left: 10px solid #800080;
+    border-right: 10px solid #800080;
+}
+
+/* Estilo general para resaltar el título */
+.tarjetaMision h4 {
+    color: #FF8C00;
+}
+
+/* Seccion Mando */
+.columnasDashboard {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
     padding: 20px;
-    color: #888888;
+    flex-wrap: nowrap; /* Para que no se apilen las columnas*/
+}
+
+.estadisticas {
+    background: rgba(10, 10, 10, 0.95);
+    border: 3px solid #FF8C00;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1;
+    min-width: 250px;
+    text-align: left;
+}
+
+.estadisticas h3 { 
+    color: #FF8C00; 
+    border-bottom: 1px solid #444; 
+}
+
+.estadisticas ul { 
+    list-style: none; /* Para que no salgan los puntos de la lista*/
+    padding: 0; 
+}
+.estadisticas li { 
+    margin: 5px 0; 
+}
+
+/* Barra de progreso */
+.progresoMisiones { 
+    margin-top: 15px; 
+}
+
+.fondoBarra {
+    background-color: #333;
+    width: 100%;
+    height: 25px;
+    border: 1px solid #555;
+}
+
+.rellenoBarra {
+    background-color: #00ff00;
+    height: 100%;
+    text-align: center;
+    line-height: 25px;
+    color: black;
+}
+
+/* --- RESPONSIVE DASHBOARD --- */
+/* Cuando la pantalla sea menor a 800px */
+@media (max-width: 800px) {
+    .columnasDashboard {
+        flex-direction: column; /* Cambia de fila a columna */
+        flex-wrap: wrap;       /* Permite que los elementos se pongan uno debajo del otro  */
+        align-items: stretch;  /* Hace que las cajas ocupen todo el ancho */
+    }
+
+    .estadisticas {
+        min-width: 100%;       /* Las cajas se estiran al 100% del ancho */
+        margin-bottom: 10px;    /* Añade separación entre ellas al estar apiladas */
+    }
 }

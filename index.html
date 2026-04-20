@@ -20,22 +20,176 @@
 
     <!-- Secciones -->
     <main id="main">
-        
+        <!-- Sección Hangar -->
         <section id="hangar" class="seccion">
             <h2>Hangar de Naves</h2>
+            
+            <!-- Apartado para buscar -->
+            <div class="busqueda">
+            <input type="text" id="buscador" placeholder="Buscar nave por nombre..." oninput="filtrarNaves()">
+        
+            <!-- Apartado para buscar por tipo de nave -->
+            <select id="filtroTipo" onchange="filtrarNaves()">
+                <option value="todos">Todos los tipos</option>
+                <option value="Caza">Cazas</option>
+                <option value="Transporte">Transportes</option>
+                <option value="Fragata">Fragatas</option>
+            </select>
+
+            <!-- Apartado para ordenar naves por velocidad -->
+            <button onclick="ordenarPorVelocidad()">Ordenar por Velocidad ↑↓</button>
+        
+        <!-- Contador para cada uno de los 3 apartados y también en el caso de que no haya seleccionado ninguno -->
+        <div id="contador">Naves visibles: 12</div>
+            </div>
+            
+            <!-- Apartado para organizar las naves en su parrilla y para mostrar sus detalles -->
+            <div class="hangarnaves">
+                <div id="parrillaNaves" class="parrilla"></div>
+                <div id="detalles" class="columnaDetalles">
+                <p class="instruccion">Selecciona una nave para ver sus detalles...</p>
+            </div>
         </section>
 
+        <!-- Sección Pilotos -->
         <section id="pilotos" class="seccion" style="display:none">
-            <h2>Registro de Pilotos</h2>
-        </section>
+    <h2>Registro de Pilotos</h2>
+    <div class="formularioPiloto">
+        <input type="hidden" id="actualizarPosicion" value="-1">
 
-        <section id="misiones" class="seccion" style="display:none">
-            <h2>Panel de Misiones</h2>
-        </section>
+        <label for="nombrePiloto">Nombre completo:</label>
+        <input type="text" id="nombrePiloto" placeholder="Ej: Luke Skywalker">
 
-        <section id="mando" class="seccion" style="display:none">
+        <label for="rangoPiloto">Rango del Piloto:</label>
+        <select id="rangoPiloto">
+            <option value="">Selecciona el rango...</option>
+            <option value="Lider">Líder de Escuadrón</option>
+            <option value="Teniente">Teniente</option>
+            <option value="Capitán">Capitán</option>
+            <option value="Comandante">Comandante</option>
+            <option value="General">General</option>
+        </select>
+
+        <label for="navePiloto">Nave Asignada:</label>
+        <select id="navePiloto">
+            </select>
+
+        <label for="victoriasPiloto">Victorias en combate:</label>
+        <input type="number" id="victoriasPiloto" placeholder="0" min="0">
+
+        <label for="estadoPiloto">Estado de disponibilidad:</label>
+        <select id="estadoPiloto">
+            <option value="activo">Activo</option>
+            <option value="herido">Herido</option>
+            <option value="kia">KIA</option>
+        </select>
+
+        <button onclick="guardarPiloto()" id="guardar" class="botones">Registrar Piloto</button>
+    </div>
+
+    <table border="1" style="width:100%; margin-top:20px;">
+        <caption>Listado de pilotos de la flota</caption>
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Rango</th>
+                <th>Nave</th>
+                <th>Victorias</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="listaPilotos"></tbody>
+    </table>
+</section>
+
+<!-- Sección Misiones -->    
+<section id="misiones" class="seccion" style="display:none">
+    <h2>Panel de Misiones</h2>
+    
+    <div class="formularioMision">
+        <label for="nombreMision">Nombre de la misión:</label>
+        <input type="text" id="nombreMision" placeholder="Ej: Robo de planos">
+
+        <label for="descripcionMision">Descripción breve:</label>
+        <input type="text" id="descripcionMision" placeholder="Detalles del objetivo">
+
+        <label for="pilotoMision">Piloto asignado:</label>
+        <select id="pilotoMision"> </select>
+
+        <label for="dificultadMision">Nivel de dificultad:</label>
+        <select id="dificultadMision">
+            <option value="todos">Seleccionar Dificultad...</option>
+            <option value="facil">Fácil</option>
+            <option value="media">Media</option>
+            <option value="dificil">Difícil</option>
+            <option value="suicida">Suicida</option>
+        </select>
+
+        <label for="fechaMision">Fecha:</label>
+        <input type="date" id="fechaMision">
+
+        <button onclick="crearMision()" class ="botones">Lanzar Misión</button>
+    </div>
+
+    <div class="filtrosMisiones">
+        <label for="filtroDificultad">Filtrar tablero por dificultad:</label>
+        <select id="filtroDificultad" onchange="cargarMisiones()">
+            <option value="todos">Todas</option>
+            <option value="facil">Fácil</option>
+            <option value="media">Media</option>
+            <option value="dificil">Difícil</option>
+            <option value="suicida">Suicida</option>
+        </select>
+    </div>
+
+    <div class="kanbanMisiones">
+        <div class="columnaMisiones">
+            <h3>Pendiente (<span id="contadorMisionesPendientes">0</span>)</h3>
+            <div id="listaMisionesPendientes" class="columnasMisiones"></div>
+        </div>
+        <div class="columnaMisiones">
+            <h3>En curso (<span id="contadorMisionesEnCurso">0</span>)</h3>
+            <div id="listaMisionesEnCurso" class="columnasMisiones"></div>
+        </div>
+        <div class="columnaMisiones">
+            <h3>Completada (<span id="contadorMisionesCompletadas">0</span>)</h3>
+            <div id="listaMisionesCompletadas" class="columnasMisiones"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Sección Mando de la Alianza -->    
+<section id="mando" class="seccion" style="display:none">
             <h2>Mando de la Alianza</h2>
-        </section>
+
+            <div class="columnasDashboard">
+                <div class="estadisticas">
+                    <h3>Hangar</h3>
+                    <p id="totalNaves">Total: 0</p>
+                    <ul id="estadoNaves"></ul>
+                    <p id="naveMasRapida"></p>
+                </div>
+
+            <div class="estadisticas">
+                <h3>Pilotos</h3>
+                <p id="totalPilotos">Total: 0</p>
+                <ul id="estadoPilotos"></ul>
+                <p id="mejorPiloto"></p>
+            </div>
+
+            <div class="estadisticas">
+                <h3>Misiones</h3>
+                <ul id="estadoMisiones"></ul>
+                <div class="progresoMisiones">
+                    <p><strong>Éxito de Campaña </strong> (Misiones Completadas): </p>
+                <div class="fondoBarra">
+                    <div id="progresoBarra" class="rellenoBarra">0%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
     </main>
 
